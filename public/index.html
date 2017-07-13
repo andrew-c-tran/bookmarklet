@@ -1,0 +1,38 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>weeSpring Review Tool</title>
+    <script
+            src="https://code.jquery.com/jquery-1.12.4.min.js"
+            integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+            crossorigin="anonymous"></script>
+</head>
+    <body>
+        <div class="btn review-button">
+            <a id="review-bookmarklet" href="javascript:(function()%7B%0A%20%20%20%20var%20firescript%20=%20document.createElement(%22script%22);%0A%20%20%20%20firescript.src%20=%20%22https://www.gstatic.com/firebasejs/4.1.2/firebase.js%22;%0A%20%20%09document.getElementsByTagName(%22head%22)%5B0%5D.appendChild(firescript);%0A%0A%20%20%20%20//%20the%20minimum%20version%20of%20jQuery%20we%20want%0A%20%20%20%20var%20v%20=%20%221.9.1%22;%0A%0A%20%20%20%20//%20check%20prior%20inclusion%20and%20version%0A%20%20%20%20if%20(window.jQuery%20===%20undefined%20%7C%7C%20window.jQuery.fn.jquery%20%3C%20v)%20%7B%0A%20%20%20%20%20%20%20%20var%20done%20=%20false;%0A%20%20%20%20%20%20%20%20var%20script%20=%20document.createElement(%22script%22);%0A%20%20%20%20%20%20%20%20script.src%20=%20%22//ajax.googleapis.com/ajax/libs/jquery/%22%20+%20v%20+%20%22/jquery.min.js%22;%0A%20%20%20%20%20%20%20%20script.onload%20=%20script.onreadystatechange%20=%20function()%7B%0A%20%20%20%20%20%20%20%20if%20(!done%20&&%20(!this.readyState%20%7C%7C%20this.readyState%20==%20%22loaded%22%20%7C%7C%20this.readyState%20==%20%22complete%22))%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20done%20=%20true;%0A%20%20%20%20%20%20%20%20%20%20%20%20setTimeout(initMyBookmarklet,%201000);%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D;%0A%20%20%20%20document.getElementsByTagName(%22head%22)%5B0%5D.appendChild(script);%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20initMyBookmarklet();%0A%20%20%20%20%7D%0A%0A%20%20%20%20function%20initMyBookmarklet()%20%7B%0A%20%20%20%20%20%20%20%20(window.myBookmarklet%20=%20function()%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20var%20username%20=%20%22REPLACEPAYLOAD%22;%0A%09%09%09$('body').append('%3Cdiv%20id=%22weespringUsername%22%20style=%22display:%20none;%22%3E'+username+'%3C/div%3E');%0A%09%09%09$('body').append('%3Cscript%20src=%22https://tacothursdaysandbox-38281.firebaseapp.com/reviewloader.js%22%20type=%22text/javascript%22%3E%3C%5C/script%3E');%0A%20%20%20%20%20%20%20%20%7D)();%0A%20%20%20%20%7D%0A%0A%7D)();%0A%0A%20%20%20%20">
+                Submit weeSpring Review
+            </a>
+        </div>
+        <script>
+            function getQueryParams(qs) {
+                qs = qs.split('+').join(' ');
+
+                var params = {},
+                    tokens,
+                    re = /[?&]?([^=]+)=([^&]*)/g;
+
+                while (tokens = re.exec(qs)) {
+                    params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+                }
+
+                return params;
+            }
+
+            var query = getQueryParams(document.location.search);
+            var newHref = $('#review-bookmarklet').attr('href').replace('REPLACEPAYLOAD',query.username);
+            $('#review-bookmarklet').attr('href', newHref);
+        </script>
+    </body>
+</html>

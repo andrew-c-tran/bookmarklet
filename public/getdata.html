@@ -1,0 +1,49 @@
+<link rel="stylesheet" type="text/css" href="jquery.dynatable.css" />
+<table id="my-final-table">
+    <thead style="background-color:#7b7b7b">
+    <th>site</th>
+    <th>user</th>
+    <th>rating</th>
+    <th>reviewTitle</th>
+    <th>reviewText</th>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<script
+        src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous"></script>
+<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+<script src="jquery.dynatable.js"></script>
+<script>
+    function getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
+    var firebase = window.firebase;
+    var config = {
+        apiKey: "AIzaSyCm-jezKQ3KgreJuUUQIHQwqwwPRhnxwDM",
+        authDomain: "tacothursdaysandbox-38281.firebaseapp.com",
+        databaseURL: "https://tacothursdaysandbox-38281.firebaseio.com",
+        projectId: "tacothursdaysandbox-38281",
+        storageBucket: "tacothursdaysandbox-38281.appspot.com",
+        messagingSenderId: "105198308397"
+    };
+    firebase.initializeApp(config);
+
+    var reviewsRef = firebase.database().ref('posts');
+    var tabledata = [];
+    reviewsRef.on('child_added', function(data) {
+        tabledata.push(data.val());
+        $('#my-final-table').dynatable({
+            dataset: {
+                records: tabledata
+            }
+        });
+    });
+
+</script>
