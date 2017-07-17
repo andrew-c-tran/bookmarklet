@@ -58,3 +58,28 @@ function saveReview(postData) {
 
     return firebase.database().ref().update(updates);
 }
+
+var knownForms = [
+    {
+        "star": "rating-selection",
+        "form": "js-submit-review-container"
+    },
+    {
+        "star": "form-rating--label",
+        "form": "js-reviews-reviewForm"
+    },
+    {
+        "star": "star",
+        "form": "review-submission-form"
+    }
+];
+
+for(var i = 0; i < knownForms.length; i++) {
+    var starSelector = knownForms[i].star;
+    var detectedCount = $('.'+starSelector).length;
+    if( detectedCount > 0 ) {
+        var formSelector = knownForms[i].form;
+        console.log($('.'+formSelector));
+        $('.'+formSelector).css('border','5px solid #0000ff');
+    }
+}
