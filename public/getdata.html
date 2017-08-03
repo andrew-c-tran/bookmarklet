@@ -51,7 +51,7 @@
     var reviewsRef = firebase.database().ref('posts');
     var tabledata = [];
     reviewsRef.on('child_added', function(data) {
-        addData(tabledata,data.val(),renderTable());
+        addData(tabledata,data.val(),renderTable);
     });
 
 

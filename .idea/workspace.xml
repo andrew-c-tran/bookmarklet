@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="44d49078-e2f0-4cd0-a4f4-f2fb67cfe95e" name="Default" comment="bound to all known form types, now persisting data">
+    <list default="true" id="44d49078-e2f0-4cd0-a4f4-f2fb67cfe95e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/getdata.html" afterPath="$PROJECT_DIR$/public/getdata.html" />
     </list>
@@ -65,8 +65,8 @@
       <file leaf-file-name="getdata.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/getdata.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="403">
-              <caret line="53" column="52" lean-forward="false" selection-start-line="53" selection-start-column="52" selection-end-line="53" selection-end-column="52" />
+            <state relative-caret-position="353">
+              <caret line="53" column="48" lean-forward="false" selection-start-line="53" selection-start-column="48" selection-end-line="53" selection-end-column="48" />
               <folding>
                 <element signature="n#style#0;n#thead#0;n#table#0;n#!!top" expanded="true" />
               </folding>
@@ -324,7 +324,7 @@
       <workItem from="1500333683369" duration="73000" />
       <workItem from="1500985912089" duration="786000" />
       <workItem from="1501016435759" duration="1338000" />
-      <workItem from="1501789914808" duration="7356000" />
+      <workItem from="1501789914808" duration="7457000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit of knownforms loader">
       <created>1500333711149</created>
@@ -368,11 +368,18 @@
       <option name="project" value="LOCAL" />
       <updated>1501797049677</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="bound to all known form types, now persisting data">
+      <created>1501797281149</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1501797281149</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46446000" />
+    <option name="totallyTimeSpent" value="46547000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-3" y="2" width="2564" height="1041" extended-state="0" />
@@ -845,8 +852,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/getdata.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="53" column="52" lean-forward="false" selection-start-line="53" selection-start-column="52" selection-end-line="53" selection-end-column="52" />
+        <state relative-caret-position="353">
+          <caret line="53" column="48" lean-forward="false" selection-start-line="53" selection-start-column="48" selection-end-line="53" selection-end-column="48" />
           <folding>
             <element signature="n#style#0;n#thead#0;n#table#0;n#!!top" expanded="true" />
           </folding>
