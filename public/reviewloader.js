@@ -49,11 +49,11 @@ jQuery('body').on('mouseover', '#IWRPPreviewButton', function(){
     alert('body: ' + reviewBody);
 });
 
-jQuery('.BVButton').mouseenter(function(){
+jQuery('body').on('mouseover', '.BVButton', function(){
     genericBV($(this).closest('form'));
 });
 
-jQuery('bv-submit-button').mouseenter(function(){
+jQuery('body').on('mouseover', 'bv-submit-button', function(){
     genericBV($(this).closest('form'));
 });
 
