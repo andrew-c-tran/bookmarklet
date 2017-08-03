@@ -140,7 +140,5 @@ function saveReview(postData) {
     updates['/posts/' + newReviewKey] = postData;
     updates['/user-posts/' + postData.user + '/' + newReviewKey] = postData;
 
-    jQuery.unbind('mouseover');
-    jQuery('.wees-popup-container').remove();
     return firebase.database().ref().update(updates);
 };
