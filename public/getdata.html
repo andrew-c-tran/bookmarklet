@@ -35,16 +35,24 @@
     };
     firebase.initializeApp(config);
 
-    var reviewsRef = firebase.database().ref('posts');
-    var tabledata = [];
-    reviewsRef.on('child_added', function(data) {
-        console.log(data.val());
-        tabledata.push(data.val());
+    var addData = function(array,data,callback) {
+        array.push(data);
+        callback();
+    };
+
+    var renderTable = function() {
         $('#my-final-table').dynatable({
             dataset: {
                 records: tabledata
             }
         });
+    };
+
+    var reviewsRef = firebase.database().ref('posts');
+    var tabledata = [];
+    reviewsRef.on('child_added', function(data) {
+        addData(tabledata,data.val(),renderTable());
     });
+
 
 </script>
