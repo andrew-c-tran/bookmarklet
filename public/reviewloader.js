@@ -1,5 +1,5 @@
 var payload = '<div class="wees-popup-container" style="position: fixed; bottom: 0; z-index:9999999999999999; background-color: #7b7b7b; padding: 5px 10px 0 5px;"><img src="https://weespring.com/media/weeSpring-logo-transparent-1.png"/></div>';
-var username = $('#weespringUsername').text();
+var username = jQuery('#weespringUsername').text();
 jQuery.noConflict();
 
 jQuery('body').prepend(payload);
@@ -8,53 +8,83 @@ jQuery('body').on('mouseover', '.js-submit-review', function(){
     var stars = jQuery('.rating-selected').length;
     var reviewTitle = jQuery('#review-title').val();
     var reviewBody = jQuery('#review-body').val();
-    alert('stars: ' + stars);
-    alert('title: ' + reviewTitle);
-    alert('body: ' + reviewBody);
+    alert('Thanks ' + username + ', we were successfully able to automatically submit your review to weeSpring. Please proceed with submitting your review.');
+    var review = {
+        site: window.location.origin,
+        user: username,
+        rating: stars,
+        reviewTitle: reviewTitle,
+        reviewText: reviewBody
+    };
+    saveReview(review);
 });
 
 jQuery('body').on('mouseover', '.js-reviews-submitReview', function(){
     var stars = jQuery('.form-rating input:checked').val();
     var reviewTitle = jQuery('#reviewTitleInput1').val();
     var reviewBody = jQuery('#reviewTextArea1').val();
-    alert('stars: ' + stars);
-    alert('title: ' + reviewTitle);
-    alert('body: ' + reviewBody);
+    alert('Thanks ' + username + ', we were successfully able to automatically submit your review to weeSpring. Please proceed with submitting your review.');
+    var review = {
+        site: window.location.origin,
+        user: username,
+        rating: stars,
+        reviewTitle: reviewTitle,
+        reviewText: reviewBody
+    };
+    saveReview(review);
 });
 
 jQuery('body').on('mouseover', '.review-submission-buttons', function(){
     var stars = jQuery('.stars .active').length;
     var reviewTitle = jQuery('.np-review-submission-title input').val();
     var reviewBody = jQuery('.np-review-description-input textarea').val();
-    alert('stars: ' + stars);
-    alert('title: ' + reviewTitle);
-    alert('body: ' + reviewBody);
+    alert('Thanks ' + username + ', we were successfully able to automatically submit your review to weeSpring. Please proceed with submitting your review.');
+    var review = {
+        site: window.location.origin,
+        user: username,
+        rating: stars,
+        reviewTitle: reviewTitle,
+        reviewText: reviewBody
+    };
+    saveReview(review);
 });
 
 jQuery('body').on('mouseover', '.submit', function(){
     var stars = jQuery('.fa-star.active').length;
     var reviewTitle = jQuery('#reviewTitleSection input').val();
     var reviewBody = jQuery('#reviewBodySection textarea').val();
-    alert('stars: ' + stars);
-    alert('title: ' + reviewTitle);
-    alert('body: ' + reviewBody);
+    alert('Thanks ' + username + ', we were successfully able to automatically submit your review to weeSpring. Please proceed with submitting your review.');
+    var review = {
+        site: window.location.origin,
+        user: username,
+        rating: stars,
+        reviewTitle: reviewTitle,
+        reviewText: reviewBody
+    };
+    saveReview(review);
 });
 
 jQuery('body').on('mouseover', '#IWRPPreviewButton', function(){
     var stars = jQuery('#IWRPFRating input').val() / 2;
     var reviewTitle = jQuery('#IWRPFReviewTitle input').val();
     var reviewBody = jQuery('#IWRPFReviewContent textarea').val();
-    alert('stars: ' + stars);
-    alert('title: ' + reviewTitle);
-    alert('body: ' + reviewBody);
+    alert('Thanks ' + username + ', we were successfully able to automatically submit your review to weeSpring. Please proceed with submitting your review.');
+    var review = {
+        site: window.location.origin,
+        user: username,
+        rating: stars,
+        reviewTitle: reviewTitle,
+        reviewText: reviewBody
+    };
+    saveReview(review);
 });
 
 jQuery('body').on('mouseover', '.BVButton', function(){
-    genericBV($(this).closest('form'));
+    genericBV(jQuery(this).closest('form'));
 });
 
 jQuery('body').on('mouseover', 'bv-submit-button', function(){
-    genericBV($(this).closest('form'));
+    genericBV(jQuery(this).closest('form'));
 });
 
 var genericBV = function(target){
@@ -90,8 +120,8 @@ var genericBV = function(target){
     }else{
         alert('Sorry! We were unable to automatically submit your review to weeSpring. Please take a screenshot of your review and submit it manually.');
     }
-    $('body').unbind('click');
-    $('.wees-popup-container').remove();
+    jQuery('body').unbind('click');
+    jQuery('.wees-popup-container').remove();
 };
 
 function saveReview(postData) {
@@ -110,5 +140,7 @@ function saveReview(postData) {
     updates['/posts/' + newReviewKey] = postData;
     updates['/user-posts/' + postData.user + '/' + newReviewKey] = postData;
 
+    jQuery.unbind('mouseover');
+    jQuery('.wees-popup-container').remove();
     return firebase.database().ref().update(updates);
 };
