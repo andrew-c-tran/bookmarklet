@@ -1,128 +1,80 @@
 var payload = '<div class="wees-popup-container" style="position: fixed; bottom: 0; z-index:9999999999999999; background-color: #7b7b7b; padding: 5px 10px 0 5px;"><img src="https://weespring.com/media/weeSpring-logo-transparent-1.png"/></div>';
 var username = jQuery('#weespringUsername').text();
-jQuery.noConflict();
+
+if(!jQuery){
+    jQuery.noConflict();
+}
 
 jQuery('body').prepend(payload);
 
-jQuery('body').on('mouseover', '.js-submit-review', function(){
-    var stars = jQuery('.rating-selected').length;
-    var reviewTitle = jQuery('#review-title').val();
-    var reviewBody = jQuery('#review-body').val();
-    alert('Thanks ' + username + ', we were successfully able to automatically submit your review to weeSpring. Please proceed with submitting your review.');
-    var review = {
-        site: window.location.origin,
-        user: username,
-        rating: stars,
-        reviewTitle: reviewTitle,
-        reviewText: reviewBody
-    };
-    saveReview(review);
-});
+var selectors = [];
 
-jQuery('body').on('mouseover', '.js-reviews-submitReview', function(){
-    var stars = jQuery('.form-rating input:checked').val();
-    var reviewTitle = jQuery('#reviewTitleInput1').val();
-    var reviewBody = jQuery('#reviewTextArea1').val();
-    alert('Thanks ' + username + ', we were successfully able to automatically submit your review to weeSpring. Please proceed with submitting your review.');
-    var review = {
-        site: window.location.origin,
-        user: username,
-        rating: stars,
-        reviewTitle: reviewTitle,
-        reviewText: reviewBody
-    };
-    saveReview(review);
-});
-
-jQuery('body').on('mouseover', '.review-submission-buttons', function(){
-    var stars = jQuery('.stars .active').length;
-    var reviewTitle = jQuery('.np-review-submission-title input').val();
-    var reviewBody = jQuery('.np-review-description-input textarea').val();
-    alert('Thanks ' + username + ', we were successfully able to automatically submit your review to weeSpring. Please proceed with submitting your review.');
-    var review = {
-        site: window.location.origin,
-        user: username,
-        rating: stars,
-        reviewTitle: reviewTitle,
-        reviewText: reviewBody
-    };
-    saveReview(review);
-});
-
-jQuery('body').on('mouseover', '.submit', function(){
-    var stars = jQuery('.fa-star.active').length;
-    var reviewTitle = jQuery('#reviewTitleSection input').val();
-    var reviewBody = jQuery('#reviewBodySection textarea').val();
-    alert('Thanks ' + username + ', we were successfully able to automatically submit your review to weeSpring. Please proceed with submitting your review.');
-    var review = {
-        site: window.location.origin,
-        user: username,
-        rating: stars,
-        reviewTitle: reviewTitle,
-        reviewText: reviewBody
-    };
-    saveReview(review);
-});
-
-jQuery('body').on('mouseover', '#IWRPPreviewButton', function(){
-    var stars = jQuery('#IWRPFRating input').val() / 2;
-    var reviewTitle = jQuery('#IWRPFReviewTitle input').val();
-    var reviewBody = jQuery('#IWRPFReviewContent textarea').val();
-    alert('Thanks ' + username + ', we were successfully able to automatically submit your review to weeSpring. Please proceed with submitting your review.');
-    var review = {
-        site: window.location.origin,
-        user: username,
-        rating: stars,
-        reviewTitle: reviewTitle,
-        reviewText: reviewBody
-    };
-    saveReview(review);
-});
-
-jQuery('body').on('mouseover', '.BVButton', function(){
-    genericBV(jQuery(this).closest('form'));
-});
-
-jQuery('body').on('mouseover', 'bv-submit-button', function(){
-    genericBV(jQuery(this).closest('form'));
-});
-
-var genericBV = function(target){
-    var valid = false;
-    var formData = target.serializeArray();
-    if (formData.length > 1) {
-        var title = formData.filter(function (input) {
-            return input.name.toLowerCase() == 'title';
-        });
-        var reviewText = formData.filter(function (input) {
-            return input.name.toLowerCase() == 'reviewtext';
-        });
-        var rating = formData.filter(function (input) {
-            return input.name.toLowerCase() == 'rating';
-        });
-        if(rating[0] && title[0] && reviewText[0]) {
-            if(rating[0].value*1 > 0 && title[0].value.length > 0 && reviewText[0].value.length > 0) {
-                valid = true;
-            }
-        }
-    }
-    if(valid) {
-        alert('Thanks ' + username + ', we were successfully able to automatically submit your review to weeSpring. Please proceed with submitting your review.');
-        var review = {
-            site: window.location.origin,
-            user: username,
-            rating: rating[0].value,
-            reviewTitle: title[0].value,
-            reviewText: reviewText[0].value,
-            fullData: formData
-        };
-        saveReview(review);
-    }else{
-        alert('Sorry! We were unable to automatically submit your review to weeSpring. Please take a screenshot of your review and submit it manually.');
-    }
-    jQuery('body').unbind('click');
-    jQuery('.wees-popup-container').remove();
+//BuyBuyBaby, BedBathBeyond
+selectors['#BVSubmissionContainer'] = {
+    stars: "[name='rating']",
+    title: "[name='title']",
+    body: "[name='reviewtext']",
+    submit: "#BVButton -> Submit"
 };
+
+//Walgreens
+selectors["#bv-mboxzone-lightbox"] = {
+    stars: ".bv-rating-input:checked",
+    title: "#bv-text-field-title",
+    body: "#bv-textarea-field-reviewtext",
+    submit: "bv-submission-button-submit"
+};
+
+//Albeebaby
+selectors[".pdReviewForm"] = {
+    stars: "#pdSetRating",
+    title: "[name='reviewTitle']",
+    body: "[name='reviewBody']",
+    submit: ".submit"
+};
+
+//Mbeans
+selectors["#ItemPreviewReviewPopup"] = {
+    stars: ".ItemReviewRating",
+    title: ".ItemReviewTitle",
+    body: ".ItemReviewContent",
+    submit: "#IPRPBSubmitReview"
+};
+
+//Walmart
+selectors[".js-submit-review-container"] = {
+    stars: "#review-rating",
+    title: "#review-title",
+    body: "#review-body",
+    submit: ".js-submit-review"
+};
+
+//Target
+selectors[".js-reviews-reviewForm"] = {
+    stars: "[name='overall--rating']",
+    title: "#reviewTitleInput2",
+    body: "#reviewTextArea2",
+    submit: ".js-reviews-submitReview"
+};
+
+//Nordstrom
+selectors["#ReviewSubmission"] = {
+    stars: "star active",
+    title: "[name='title']",
+    body: "[name='reviewtext']",
+    submit: ".review-submission-buttons button"
+};
+
+
+for (var key in selectors) {
+    if(jQuery(key).length){
+        var section = selectors[key];
+        var stars = jQuery(section.stars).val();
+        var title = jQuery(section.title).val();
+        var body = jQuery(section.body).val();
+        console.log(stars,title,body);
+    }
+}
 
 function saveReview(postData) {
     var firebase = window.firebase;
