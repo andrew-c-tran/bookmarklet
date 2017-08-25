@@ -102,7 +102,7 @@ for (var key in selectors) {
 }
 
 if(!mainKey) {
-    alert('Hmmm, something isn\'t working. Let\'s try it again. Still not working? Email support@weespring.com.');
+    alert('Hmmm, something isn\'t working. Please make sure you\'re on the product page of what you want to review and let\'s try it again. Still not working? Email support@weespring.com.');
 }
 
 function saveReview(postData) {
