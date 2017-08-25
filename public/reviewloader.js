@@ -1,17 +1,6 @@
 var payload = '<div class="wees-popup-container" style="position: fixed; bottom: 0; z-index:9999999999999999; background-color: #7b7b7b; padding: 5px 10px 0 5px;"><img src="https://weespring.com/media/weeSpring-logo-transparent-1.png"/></div>';
 var username = jQuery('#weespringUsername').text();
 
-var firebase = window.firebase;
-var config = {
-    apiKey: "AIzaSyCm-jezKQ3KgreJuUUQIHQwqwwPRhnxwDM",
-    authDomain: "tacothursdaysandbox-38281.firebaseapp.com",
-    databaseURL: "https://tacothursdaysandbox-38281.firebaseio.com",
-    projectId: "tacothursdaysandbox-38281",
-    storageBucket: "tacothursdaysandbox-38281.appspot.com",
-    messagingSenderId: "105198308397"
-};
-firebase.initializeApp(config);
-
 jQuery('body').prepend(payload);
 
 var selectors = [];
@@ -81,6 +70,7 @@ for (var key in selectors) {
         mainKey = key + '';
         sections = selectors[mainKey];
         jQuery('body').on('mousedown', selectors[mainKey]['submit'], function() {
+            console.log(selectors[mainKey]['submit']);
             if (mainKey == "#ItemPreviewReviewPopup") {
                 var stars = jQuery(mainKey).find(sections.stars).attr('class').replace('ItemReviewRating Rating', '') / 2;
                 var title = jQuery(mainKey).find(sections.title).text();
@@ -113,15 +103,24 @@ for (var key in selectors) {
 }
 
 if(!mainKey) {
-    alert('Hmmm, something isn\'t working. Please make sure you\'re on the product page of what you want to review and let\'s try it again. Still not working? Email support@weespring.com.');
+    jQuery('.wees-popup-container').hide();
+    alert('Hmmm, something isn\'t working. Please make sure you\'re on the review page and let\'s try it again. Still not working? Email support@weespring.com.');
 }
 
 function saveReview(postData) {
+    var firebase = window.firebase;
+    var config = {
+        apiKey: "AIzaSyCm-jezKQ3KgreJuUUQIHQwqwwPRhnxwDM",
+        authDomain: "tacothursdaysandbox-38281.firebaseapp.com",
+        databaseURL: "https://tacothursdaysandbox-38281.firebaseio.com",
+        projectId: "tacothursdaysandbox-38281",
+        storageBucket: "tacothursdaysandbox-38281.appspot.com",
+        messagingSenderId: "105198308397"
+    };
+    firebase.initializeApp(config);
     var newReviewKey = firebase.database().ref().child('reviews').push().key;
     var updates = {};
     updates['/posts/' + newReviewKey] = postData;
-    updates['/user-posts/' + postData.user + '/' + newReviewKey] = postData;
 
     return firebase.database().ref().update(updates);
 };
-

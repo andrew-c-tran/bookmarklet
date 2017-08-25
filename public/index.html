@@ -8,6 +8,7 @@
             src="https://code.jquery.com/jquery-1.12.4.min.js"
             integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
             crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
     <body>
         <h3>Hello<span class="username"></span>!</h3>
@@ -28,10 +29,13 @@
             You’ll continue reviewing and rating as always, click submit, and receive another pop-up confirming that your review has been noted by weeSpring.
             <div>[picture of success message]</div>
         </div>
-        <div class="btn review-button">
-            <a id="review-bookmarklet" href="javascript:(function(e,a,g,h,f,c,b,d){if(!(f=e.jQuery)||g>f.fn.jquery||h(f)){c=a.createElement(&quot;script&quot;);c.type=&quot;text/javascript&quot;;c.src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/&quot;+g+&quot;/jquery.min.js&quot;;c.onload=c.onreadystatechange=function(){if(!b&amp;&amp;(!(d=this.readyState)||d==&quot;loaded&quot;||d==&quot;complete&quot;)){h((f=e.jQuery).noConflict(1),b=1);f(c).remove()}};a.documentElement.childNodes[0].appendChild(c)}})(window,document,&quot;1.3.2&quot;,function($,L){var username=&quot;REPLACEPAYLOAD&quot;;jQuery('head').append('<script src=&quot;https://www.gstatic.com/firebasejs/4.2.0/firebase.js&quot;></script>');jQuery('body').append('<div id=&quot;weespringUsername&quot; style=&quot;display: none;&quot;>'+username+'</div>');jQuery('body').append('<script src=&quot;https://tacothursdaysandbox-38281.firebaseapp.com/reviewloader.js&quot; type=&quot;text/javascript&quot;></script>');});">
-                Submit weeSpring Review
-            </a>
+        <div style="width:100%; padding: 50px;">
+            <h4>Custom Button For<span class="username"></span></h4>
+            <div class="btn btn-info review-button">
+                <a style="color: #ffffff !important;" id="review-bookmarklet" href="javascript:void%20function(e){var%20a=function(e){var%20a=%22REPLACEPAYLOAD%22;jQuery(%22body%22).append('%3Cscript%20src=%22https://www.gstatic.com/firebasejs/4.2.0/firebase.js%22%3E%3C/script%3E'),jQuery(%22body%22).append('%3Cdiv%20id=%22weespringUsername%22%20style=%22display:%20none;%22%3E'+a+%22%3C/div%3E%22),jQuery(%22body%22).append('%3Cscript%20src=%22https://tacothursdaysandbox-38281.firebaseapp.com/reviewloader.js%22%20type=%22text/javascript%22%3E%3C/script%3E')},t=e%26%26e.fn%26%26parseFloat(e.fn.jquery)%3E=1.7;if(t)a(e);else{var%20r=document.createElement(%22script%22);r.src=%22//ajax.googleapis.com/ajax/libs/jquery/1/jquery.js%22,r.onload=r.onreadystatechange=function(){var%20e=this.readyState;e%26%26%22loaded%22!==e%26%26%22complete%22!==e||a(jQuery.noConflict())}}document.getElementsByTagName(%22head%22)[0].appendChild(r)}(window.jQuery);">
+                    weeSpring
+                </a>
+            </div>
         </div>
         <script>
             function getQueryParams(qs) {
@@ -49,9 +53,10 @@
             }
 
             var query = getQueryParams(document.location.search);
-            var newHref = $('#review-bookmarklet').attr('href').replace('REPLACEPAYLOAD',query.username);
+            var username = query.username || query.id;
+            var newHref = $('#review-bookmarklet').attr('href').replace('REPLACEPAYLOAD',username);
             $('#review-bookmarklet').attr('href', newHref);
-            $('.username').text(' ' + query.username);
+            $('.username').text(' ' + username);
         </script>
     </body>
 </html>
