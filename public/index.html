@@ -10,8 +10,26 @@
             crossorigin="anonymous"></script>
 </head>
     <body>
+        <h3>Hello<span class="username"></span>!</h3>
+        <div>
+            The weeSpring Parent Panel button will allow you to easily record all the awesome reviews you write for the products you’re testing.
+            Just a few simple clicks and you’ll be on your way.
+        </div>
+        <div style="text-decoration: underline; font-weight: bold;">
+            Here’s how it works:
+        </div>
+        <div>
+            When writing your review on various sites like Target or Buy Buy Baby, you’ll first click on your Parent Panel button.
+            <div>[picture of cursor on toolbar bookmark]</div>
+            A pop-up will let you know your review is being captured.
+            <div>[picture of activation confirmation]</div>
+        </div>
+        <div>
+            You’ll continue reviewing and rating as always, click submit, and receive another pop-up confirming that your review has been noted by weeSpring.
+            <div>[picture of success message]</div>
+        </div>
         <div class="btn review-button">
-            <a id="review-bookmarklet" href="javascript:(function()%7B%0A%20%20%20%20var%20firescript%20=%20document.createElement(%22script%22);%0A%20%20%20%20firescript.src%20=%20%22https://www.gstatic.com/firebasejs/4.1.2/firebase.js%22;%0A%20%20%09document.getElementsByTagName(%22head%22)%5B0%5D.appendChild(firescript);%0A%0A%20%20%20%20//%20the%20minimum%20version%20of%20jQuery%20we%20want%0A%20%20%20%20var%20v%20=%20%221.9.1%22;%0A%0A%20%20%20%20//%20check%20prior%20inclusion%20and%20version%0A%20%20%20%20if%20(window.jQuery%20===%20undefined%20%7C%7C%20window.jQuery.fn.jquery%20%3C%20v)%20%7B%0A%20%20%20%20%20%20%20%20var%20done%20=%20false;%0A%20%20%20%20%20%20%20%20var%20script%20=%20document.createElement(%22script%22);%0A%20%20%20%20%20%20%20%20script.src%20=%20%22//ajax.googleapis.com/ajax/libs/jquery/%22%20+%20v%20+%20%22/jquery.min.js%22;%0A%20%20%20%20%20%20%20%20script.onload%20=%20script.onreadystatechange%20=%20function()%7B%0A%20%20%20%20%20%20%20%20if%20(!done%20&&%20(!this.readyState%20%7C%7C%20this.readyState%20==%20%22loaded%22%20%7C%7C%20this.readyState%20==%20%22complete%22))%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20done%20=%20true;%0A%20%20%20%20%20%20%20%20%20%20%20%20setTimeout(initMyBookmarklet,%201000);%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D;%0A%20%20%20%20document.getElementsByTagName(%22head%22)%5B0%5D.appendChild(script);%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20initMyBookmarklet();%0A%20%20%20%20%7D%0A%0A%20%20%20%20function%20initMyBookmarklet()%20%7B%0A%20%20%20%20%20%20%20%20(window.myBookmarklet%20=%20function()%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20var%20username%20=%20%22REPLACEPAYLOAD%22;%0A%09%09%09$('body').append('%3Cdiv%20id=%22weespringUsername%22%20style=%22display:%20none;%22%3E'+username+'%3C/div%3E');%0A%09%09%09$('body').append('%3Cscript%20src=%22https://tacothursdaysandbox-38281.firebaseapp.com/reviewloader.js%22%20type=%22text/javascript%22%3E%3C%5C/script%3E');%0A%20%20%20%20%20%20%20%20%7D)();%0A%20%20%20%20%7D%0A%0A%7D)();%0A%0A%20%20%20%20">
+            <a id="review-bookmarklet" href="javascript:(function(e,a,g,h,f,c,b,d){if(!(f=e.jQuery)||g>f.fn.jquery||h(f)){c=a.createElement(&quot;script&quot;);c.type=&quot;text/javascript&quot;;c.src=&quot;http://ajax.googleapis.com/ajax/libs/jquery/&quot;+g+&quot;/jquery.min.js&quot;;c.onload=c.onreadystatechange=function(){if(!b&amp;&amp;(!(d=this.readyState)||d==&quot;loaded&quot;||d==&quot;complete&quot;)){h((f=e.jQuery).noConflict(1),b=1);f(c).remove()}};a.documentElement.childNodes[0].appendChild(c)}})(window,document,&quot;1.3.2&quot;,function($,L){var username=&quot;REPLACEPAYLOAD&quot;;jQuery('body').append('<div id=&quot;weespringUsername&quot; style=&quot;display:none;&quot;>'+username+'</div>');jQuery('body').append('<script src=&quot;https://tacothursdaysandbox-38281.firebaseapp.com/reviewloader.js&quot; type=&quot;text/javascript&quot;></script>');});">
                 Submit weeSpring Review
             </a>
         </div>
@@ -33,6 +51,7 @@
             var query = getQueryParams(document.location.search);
             var newHref = $('#review-bookmarklet').attr('href').replace('REPLACEPAYLOAD',query.username);
             $('#review-bookmarklet').attr('href', newHref);
+            $('.username').text(' ' + query.username);
         </script>
     </body>
 </html>
